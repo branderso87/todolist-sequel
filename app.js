@@ -11,59 +11,49 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 
 app.get('/', function (req, res) {
-  models.Todo.findOne({
-    where: {
-      completed: false
-      }
-    }).then(function (todos) {
-      res.render('todo', {
-        todos: todos
+  models.Todo.findAll({where: { completed: false }})
+  .then(function (incompleteTodos) {
+    models.Todo.findAll({where: { completed: true }})
+      .then(function (completeTodos) {
+        res.render('todo', {
+          incompleteTodos: incompleteTodos,
+          completeTodos: completeTodos
+        })
       })
-    })
+  })
 })
 
-app.get('/complete', function (req, res) {
-  models.Todo.findOne({
-    where: {
-      completed: true
-    }
-  }).then(function (complete) {
-    res.render('todo', {
-      complete: complete
+
+app.post('/', function (req, res) {
+  const newTodo = models.Todo.build({
+    task: req.body.task,
+    completed: false
+  })
+    newTodo.save().then(function () {
+      res.redirect('/')
+    })
+
+})
+
+app.post('/complete', function (req, res) {
+  models.Todo.findOne({where: {task: req.body.tocomplete}
+  }).then(function (todo) { // findone gives us the thing
+    todo.completed = true // todo sets the attribute
+    todo.save().then(function () { // and the save executes
+      res.redirect('/')
     })
   })
 })
 
-// app.post('/', function (req, res) {
-//   const newTodo = models.Todo.build({
-//     task: req.body.task,
-//     completed: false
-//   }).then(function () {
-//     newTodo.save()
-//     res.redirect('/')
-//   })
-// })
-//
-// app.post('/complete', function (req, res) {
-//   models.Todo.update({
-//     completed: true,
-//     where: {
-//       task: req.body.tocomplete
-//     }
-//   }).then(function () {
-//     res.redirect('/')
-//   })
-// })
-//
-// app.post('/delete', function (req, res) {
-//   models.Todo.destroy({
-//     where: {
-//       completed: true
-//     }
-//   }).then(function (){
-//     res.redirect('/')
-//   })
-// })
+app.post('/delete', function (req, res) {
+  models.Todo.destroy({
+    where: {
+      completed: true
+    }
+  }).then(function (){
+    res.redirect('/')
+  })
+})
 
 
 

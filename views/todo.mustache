@@ -16,20 +16,20 @@
       <div class = "incomplete-tasks">
         <form action = "/complete" method = "post">
           <ul>
-            {{#todos}}
+            {{#incompleteTodos}}
               <li>
               <button type="submit" name = "tocomplete" value = "{{task}}"> Mark as Complete</button>{{task}}
               </li>
-            {{/todos}}
+            {{/incompleteTodos}}
           </ul>
         </form>
       </div>
       <div class = "completed-tasks">
         <h2>Completed Tasks</h2>
         <ul>
-          {{#complete}}
+          {{#completeTodos}}
             <li>{{task}}</li>
-          {{/complete}}
+          {{/completeTodos}}
           <li>Climb Mount Everest</li>
           <li>Become a Millionaire</li>
           <li>Be Awesome</li>
