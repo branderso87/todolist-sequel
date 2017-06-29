@@ -34,36 +34,36 @@ app.get('/complete', function (req, res) {
   })
 })
 
-app.post('/', function (req, res) {
-  const newTodo = models.Todo.build({
-    task: req.body.task,
-    completed: false
-  }).then(function () {
-    newTodo.save()
-    res.redirect('/')
-  })
-})
-
-app.post('/complete', function (req, res) {
-  models.Todo.update({
-    completed: true,
-    where: {
-      task: req.body.tocomplete
-    }
-  }).then(function () {
-    res.redirect('/')
-  })
-})
-
-app.post('/delete', function (req, res) {
-  models.Todo.destroy({
-    where: {
-      completed: true
-    }
-  }).then(function (){
-    res.redirect('/')
-  })
-})
+// app.post('/', function (req, res) {
+//   const newTodo = models.Todo.build({
+//     task: req.body.task,
+//     completed: false
+//   }).then(function () {
+//     newTodo.save()
+//     res.redirect('/')
+//   })
+// })
+//
+// app.post('/complete', function (req, res) {
+//   models.Todo.update({
+//     completed: true,
+//     where: {
+//       task: req.body.tocomplete
+//     }
+//   }).then(function () {
+//     res.redirect('/')
+//   })
+// })
+//
+// app.post('/delete', function (req, res) {
+//   models.Todo.destroy({
+//     where: {
+//       completed: true
+//     }
+//   }).then(function (){
+//     res.redirect('/')
+//   })
+// })
 
 
 
