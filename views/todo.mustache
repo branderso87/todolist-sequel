@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="main.css">
+    <title>Todo List</title>
+  </head>
+  <body>
+    <form class="" action="/" method="post">
+      <div class ="task-input">
+        <label for="task"></label>
+        <input type="text" name="task" value="" placeholder="Add a task to ... do">
+        <button type = "submit">Add Task</button>
+      </div>
+    </form>
+      <div class = "incomplete-tasks">
+        <form action = "/complete" method = "post">
+          <ul>
+            {{#todos}}
+              <li>
+              <button type="submit" name = "tocomplete" value = "{{task}}"> Mark as Complete</button>{{task}}
+              </li>
+            {{/todos}}
+          </ul>
+        </form>
+      </div>
+      <div class = "completed-tasks">
+        <h2>Completed Tasks</h2>
+        <ul>
+          {{#complete}}
+            <li>{{task}}</li>
+          {{/complete}}
+          <li>Climb Mount Everest</li>
+          <li>Become a Millionaire</li>
+          <li>Be Awesome</li>
+        </ul>
+        <form class="" action="/delete" method="post">
+          <button type = "submit" name = "todelete">Delete Completed</button>
+        </form>
+      </div>
+    </form>
+  </body>
+</html>

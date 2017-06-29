@@ -1,0 +1,8 @@
+body{
+  margin: 0;
+  background: purple;
+  color: white;
+}
+li{
+  list-style: none;
+}
